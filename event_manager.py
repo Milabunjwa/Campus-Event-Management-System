@@ -14,26 +14,57 @@ class EventManager:
         student = Student(student_id, name)
         self.students.append(student)
 
-    def create_event(self, event_id, title, date):
-        event = Event(event_id, title, date)
+    def create_event(
+            self,
+            event_id,
+            title,
+            date,
+            capacity
+    ):
+        event = Event(
+            event_id,
+            title,
+            date,
+            capacity
+        )
+
         self.events.append(event)
 
-    def register_student(self, student_id, event_id):
+    def register_student(
+            self,
+            student_id,
+            event_id
+    ):
 
-        student = None
-        event = None
+        student = self.find_student_by_id(
+            student_id
+        )
 
-        for s in self.students:
-            if s.student_id == student_id:
-                student = s
+        event = self.find_event_by_id(
+            event_id
+        )
 
-        for e in self.events:
-            if e.event_id == event_id:
-                event = e
+        if not student or not event:
+            return False
 
-        if student and event:
-            registration = Registration(student, event)
-            self.registrations.append(registration)
+        if (
+                self.get_registration_count(
+                    event_id
+                )
+                >= event.capacity
+        ):
+            return False
+
+        registration = Registration(
+            student,
+            event
+        )
+
+        self.registrations.append(
+            registration
+        )
+
+        return True
 
     def get_events(self):
         return self.events
@@ -76,3 +107,20 @@ class EventManager:
                 matches.append(student)
 
         return matches
+
+    def get_registration_count(
+            self,
+            event_id
+    ):
+
+        count = 0
+
+        for registration in self.registrations:
+
+            if (
+                    registration.event.event_id
+                    == event_id
+            ):
+                count += 1
+
+        return count

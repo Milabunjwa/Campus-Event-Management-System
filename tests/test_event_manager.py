@@ -19,7 +19,8 @@ class TestEventManager(unittest.TestCase):
         self.manager.create_event(
             "E001",
             "Career Fair",
-            "2026-07-15"
+            "2026-07-15",
+            100
         )
 
         self.assertEqual(
@@ -34,10 +35,11 @@ class TestEventManager(unittest.TestCase):
         )
 
         self.manager.create_event(
-            "E001",
-            "Career Fair",
-            "2026-07-15"
-        )
+        "E001",
+        "Career Fair",
+        "2026-07-15",
+        100
+    )
 
         self.manager.register_student(
             "S001",
@@ -53,7 +55,8 @@ class TestEventManager(unittest.TestCase):
         self.manager.create_event(
             "E001",
             "Career Fair",
-            "2026-07-15"
+            "2026-07-15",
+            100
         )
 
         self.assertEqual(
@@ -68,10 +71,11 @@ class TestEventManager(unittest.TestCase):
         )
 
         self.manager.create_event(
-            "E001",
-            "Career Fair",
-            "2026-07-15"
-        )
+        "E001",
+        "Career Fair",
+        "2026-07-15",
+        100
+    )
 
         self.manager.register_student(
             "S001",
@@ -86,10 +90,11 @@ class TestEventManager(unittest.TestCase):
     def test_find_event_by_id(self):
 
         self.manager.create_event(
-            "E001",
-            "Career Fair",
-            "2026-07-15"
-        )
+        "E001",
+        "Career Fair",
+        "2026-07-15",
+        100
+    )
 
         event = self.manager.find_event_by_id(
             "E001"
@@ -100,10 +105,11 @@ class TestEventManager(unittest.TestCase):
     def test_find_event_by_title(self):
 
         self.manager.create_event(
-            "E001",
-            "Career Fair",
-            "2026-07-15"
-        )
+        "E001",
+        "Career Fair",
+        "2026-07-15",
+        100
+    )
 
         results = self.manager.find_event_by_title(
             "Career"
@@ -141,6 +147,39 @@ class TestEventManager(unittest.TestCase):
         self.assertEqual(
             len(results),
             1
+        )
+
+    def test_event_capacity_limit(self):
+
+        self.manager.add_student(
+            "S001",
+            "Mila"
+        )
+
+        self.manager.add_student(
+            "S002",
+            "John"
+        )
+
+        self.manager.create_event(
+            "E001",
+            "Career Fair",
+            "2026-07-15",
+            1
+        )
+
+        self.assertTrue(
+            self.manager.register_student(
+                "S001",
+                "E001"
+            )
+        )
+
+        self.assertFalse(
+            self.manager.register_student(
+                "S002",
+                "E001"
+            )
         )
 
 

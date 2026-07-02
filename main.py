@@ -36,12 +36,14 @@ while True:
         title = input("Event Title: ")
         date = input("Event Date: ")
 
-        manager.create_event(
-            event_id,
-            title,
-            date
-        )
+        capacity = int(input("Capacity: "))
 
+        manager.create_event(
+        event_id,
+        title,
+        date,
+        capacity
+    )
         print("Event created.")
 
     elif choice == "3":
@@ -49,12 +51,18 @@ while True:
         student_id = input("Student ID: ")
         event_id = input("Event ID: ")
 
-        manager.register_student(
+        success = manager.register_student(
             student_id,
             event_id
         )
-
-        print("Registration successful.")
+        if success:
+            print(
+            "Registration successful."
+        )
+        else:
+            print(
+        "Registration failed."
+        )
 
     elif choice == "4":
 
