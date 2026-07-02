@@ -58,3 +58,21 @@ class EventManager:
                 matches.append(event)
 
         return matches
+
+    def find_student_by_id(self, student_id):
+
+        for student in self.students:
+            if student.student_id == student_id:
+                return student
+
+        return None
+
+    def find_student_by_name(self, name):
+
+        matches = []
+
+        for student in self.students:
+            if name.lower() in student.name.lower():
+                matches.append(student)
+
+        return matches

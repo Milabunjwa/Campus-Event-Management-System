@@ -12,7 +12,9 @@ while True:
     print("5. View Registrations")
     print("6. Search Event by ID")
     print("7. Search Event by Title")
-    print("8. Exit")
+    print("8. Search Student by ID")
+    print("9. Search Student by Name")
+    print("10. Exit")
 
     choice = input("Choose option: ")
 
@@ -89,4 +91,37 @@ while True:
             print("No matching events found.")
 
     elif choice == "8":
+
+        student_id = input(
+            "Enter Student ID: "
+        )
+
+        student = manager.find_student_by_id(
+            student_id
+        )
+
+        if student:
+            print(student)
+        else:
+            print("Student not found.")
+
+    elif choice == "9":
+
+        name = input(
+            "Enter Student Name: "
+        )
+
+        results = manager.find_student_by_name(
+            name
+        )
+
+        if results:
+
+            for student in results:
+                print(student)
+
+        else:
+            print("No students found.")
+
+    elif choice == "10":
         break

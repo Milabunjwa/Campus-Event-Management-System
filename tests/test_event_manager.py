@@ -114,6 +114,35 @@ class TestEventManager(unittest.TestCase):
             1
         )
 
+    def test_find_student_by_id(self):
+
+        self.manager.add_student(
+            "S001",
+            "Mila"
+        )
+
+        student = self.manager.find_student_by_id(
+            "S001"
+        )
+
+        self.assertIsNotNone(student)
+
+    def test_find_student_by_name(self):
+
+        self.manager.add_student(
+            "S001",
+            "Mila"
+        )
+
+        results = self.manager.find_student_by_name(
+            "Mil"
+        )
+
+        self.assertEqual(
+            len(results),
+            1
+        )
+
 
 if __name__ == "__main__":
     unittest.main()
