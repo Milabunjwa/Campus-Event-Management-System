@@ -40,3 +40,21 @@ class EventManager:
 
     def get_registrations(self):
         return self.registrations
+
+    def find_event_by_id(self, event_id):
+
+        for event in self.events:
+            if event.event_id == event_id:
+                return event
+
+        return None
+
+    def find_event_by_title(self, title):
+
+        matches = []
+
+        for event in self.events:
+            if title.lower() in event.title.lower():
+                matches.append(event)
+
+        return matches

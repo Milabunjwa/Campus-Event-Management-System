@@ -1,9 +1,8 @@
-class Event:
+class Registration:
 
-    def __init__(self, event_id, title, date):
-        self.event_id = event_id
-        self.title = title
-        self.date = date
+    def __init__(self, student, event):
+        self.student = student
+        self.event = event
 
     def __str__(self):
-        return f"{self.event_id} | {self.title} | {self.date}"
+        return f"{self.student.name} registered for {self.event.title}"
