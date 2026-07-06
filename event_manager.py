@@ -12,6 +12,8 @@ class EventManager:
         self.students = []
         self.registrations = []
 
+        self.load_events()
+
     def add_student(self, student_id, name):
         student = Student(student_id, name)
         self.students.append(student)
@@ -151,3 +153,33 @@ class EventManager:
                 file,
                 indent=4
             )
+
+    def load_events(self):
+
+        try:
+
+            with open(
+                    "data/events.json",
+                    "r"
+            ) as file:
+
+                event_data = json.load(
+                    file
+                )
+                self.events.clear()
+
+                for event in event_data:
+
+                    loaded_event = Event(
+                        event["event_id"],
+                        event["title"],
+                        event["date"],
+                        event["capacity"]
+                    )
+
+                    self.events.append(
+                        loaded_event
+                    )
+
+        except FileNotFoundError:
+            pass

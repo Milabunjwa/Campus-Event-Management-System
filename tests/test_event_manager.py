@@ -200,6 +200,22 @@ class TestEventManager(unittest.TestCase):
             )
         )
 
+    def test_load_events(self):
+
+        self.manager.create_event(
+            "E001",
+            "Career Fair",
+            "2026-07-15",
+            100
+        )
+
+        new_manager = EventManager()
+
+        self.assertGreater(
+            len(new_manager.events),
+            0
+        )
+
 
 if __name__ == "__main__":
     unittest.main()
