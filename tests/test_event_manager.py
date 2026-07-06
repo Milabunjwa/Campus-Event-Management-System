@@ -1,3 +1,4 @@
+import os
 import unittest
 from event_manager import EventManager
 
@@ -179,6 +180,23 @@ class TestEventManager(unittest.TestCase):
             self.manager.register_student(
                 "S002",
                 "E001"
+            )
+        )
+
+    def test_save_events(self):
+
+        self.manager.create_event(
+            "E001",
+            "Career Fair",
+            "2026-07-15",
+            100
+        )
+
+        self.manager.save_events()
+
+        self.assertTrue(
+            os.path.exists(
+                "data/events.json"
             )
         )
 

@@ -1,3 +1,5 @@
+import json
+import os
 from student import Student
 from event import Event
 from registration import Registration
@@ -29,6 +31,7 @@ class EventManager:
         )
 
         self.events.append(event)
+        self.save_events()
 
     def register_student(
             self,
@@ -124,3 +127,27 @@ class EventManager:
                 count += 1
 
         return count
+
+    def save_events(self):
+
+        event_data = []
+
+        for event in self.events:
+
+            event_data.append({
+                "event_id": event.event_id,
+                "title": event.title,
+                "date": event.date,
+                "capacity": event.capacity
+            })
+
+        with open(
+                "data/events.json",
+                "w"
+        ) as file:
+
+            json.dump(
+                event_data,
+                file,
+                indent=4
+            )
