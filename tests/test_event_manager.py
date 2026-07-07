@@ -1,11 +1,22 @@
+import json
 import os
 import unittest
+
 from event_manager import EventManager
 
 
 class TestEventManager(unittest.TestCase):
 
     def setUp(self):
+
+        os.makedirs("data", exist_ok=True)
+
+        with open("data/events.json", "w") as file:
+            json.dump([], file)
+
+        with open("data/students.json", "w") as file:
+            json.dump([], file)
+
         self.manager = EventManager()
 
     def test_add_student(self):
@@ -244,6 +255,14 @@ class TestEventManager(unittest.TestCase):
             report[0]["attendees"],
             1
         )
+
+    def tearDown(self):
+
+        with open("data/events.json", "w") as file:
+            json.dump([], file)
+
+        with open("data/students.json", "w") as file:
+            json.dump([], file)
 
 
 if __name__ == "__main__":
