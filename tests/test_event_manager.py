@@ -216,6 +216,35 @@ class TestEventManager(unittest.TestCase):
             0
         )
 
+    def test_generate_report(self):
+
+        self.manager.add_student(
+            "S001",
+            "Mila"
+        )
+
+        self.manager.create_event(
+            "E001",
+            "Career Fair",
+            "2026-07-15",
+            100
+        )
+
+        self.manager.register_student(
+            "S001",
+            "E001"
+        )
+
+        report = (
+            self.manager
+            .generate_attendance_report()
+        )
+
+        self.assertEqual(
+            report[0]["attendees"],
+            1
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

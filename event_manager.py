@@ -183,3 +183,26 @@ class EventManager:
 
         except FileNotFoundError:
             pass
+
+    def generate_attendance_report(self):
+
+        report = []
+
+        for event in self.events:
+
+            attendee_count = 0
+
+            for registration in self.registrations:
+
+                if (
+                        registration.event.event_id
+                        == event.event_id
+                ):
+                    attendee_count += 1
+
+            report.append({
+                "event": event.title,
+                "attendees": attendee_count
+            })
+
+        return report

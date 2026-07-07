@@ -14,7 +14,8 @@ while True:
     print("7. Search Event by Title")
     print("8. Search Student by ID")
     print("9. Search Student by Name")
-    print("10. Exit")
+    print("10. Generate Attendance Report")
+    print("11. Exit")
 
     choice = input("Choose option: ")
 
@@ -132,4 +133,20 @@ while True:
             print("No students found.")
 
     elif choice == "10":
+
+        report = (
+            manager
+            .generate_attendance_report()
+        )
+
+        print("\nAttendance Report")
+
+        for item in report:
+
+            print(
+                f"{item['event']} "
+                f"- "
+                f"{item['attendees']} attendees"
+            )
+    elif choice == "11":
         break
